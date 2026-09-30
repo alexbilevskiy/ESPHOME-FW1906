@@ -1,0 +1,33 @@
+# Example configuration for ESPHOME-FW1906
+esphome:
+  name: fw1906-example
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+# Import the external component from your GitHub repository
+external_components:
+  - source:
+      type: git
+      url: https://github.com/alexbilevskiy/ESPHOME-FW1906
+      ref: main
+    components: [ fw1906 ]
+
+light:
+  - platform: fw1906
+    id: fw1906_light
+    name: "FW1906 LED Strip"
+    pin: GPIO4
+    num_leds: 60
+    channel_order: WXGRBC # Per-IC wire order: R G B, C=cold white, W=warm white, X=unused (always 0). X can be anywhere in the frame.
+    color_interlock: true # Protects power supply by interlocking RGB and White
+    cold_white_color_temperature: 153 mireds
+    warm_white_color_temperature: 500 mireds
+    cct_transition_speed: 3s
+    dithering: true
+    effects:
+      - addressable_rainbow:
+      - addressable_scan:
+      - addressable_twinkle:
