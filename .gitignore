@@ -3,3 +3,4 @@ venv/
 .esphome/
 __pycache__/
 *.pyc
+.idea/

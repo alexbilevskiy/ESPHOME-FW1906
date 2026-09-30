@@ -44,15 +44,9 @@ struct LedParams {
 
 class FW1906LightOutput : public light::AddressableLight {
  public:
+  // All other members are covered by their in-class initializers (NSDMI).
   FW1906LightOutput(uint16_t num_leds, uint8_t din_pin)
-      : num_leds_(num_leds), din_pin_(din_pin), buf_(nullptr), effect_data_(nullptr), rmt_buf_(nullptr) {
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
-    this->din_channel_ = nullptr;
-    this->din_encoder_ = nullptr;
-#else
-    this->din_channel_ = RMT_CHANNEL_MAX;
-#endif
-  }
+      : num_leds_(num_leds), din_pin_(din_pin) {}
   ~FW1906LightOutput();
 
   void setup() override;
